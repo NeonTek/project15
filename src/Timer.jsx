@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
+import accurateInterval from 'accurate-interval';
 
 class Timer extends Component {
   constructor(props) {
@@ -44,7 +45,7 @@ class Timer extends Component {
 
     if (!this.state.isPlaying) {
       this.setState({ isPlaying: true, type: "Stop" });
-      this.timer = setInterval(() => {
+      this.timer = accurateInterval(() => {
         this.setState((prevState) => {
           if (prevState.timeLeft > 0) {
             return { timeLeft: prevState.timeLeft - 1 };

@@ -11,9 +11,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "accurate": "^1.5.8",
+    "accurate-interval": "^1.0.9",
+    "interval": "^0.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "react-use": "^17.5.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
