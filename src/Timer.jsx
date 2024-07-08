@@ -2,6 +2,9 @@
 import React, { Component } from 'react';
 import accurateInterval from 'accurate-interval';
 
+navigator.vibrate = navigator.vibrate || navigator.webkitVibrate ||
+  navigator.mozVibrate || navigator.msVibrate;
+
 class Timer extends Component {
   constructor(props) {
     super(props);
