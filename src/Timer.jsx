@@ -1,4 +1,5 @@
-import { Component } from 'react';
+//Some of this code is AI generated
+import React, { Component } from 'react';
 import accurateInterval from 'accurate-interval';
 
 class Timer extends Component {
@@ -11,7 +12,7 @@ class Timer extends Component {
       isSession: true,
       situation: 'Session',
       isPlaying: false,
-      type: 'Start'
+      type: 'Start',
     };
 
     this.handleAdd = this.handleAdd.bind(this);
@@ -69,7 +70,7 @@ class Timer extends Component {
       }, 1000);
     } else {
       this.setState({ isPlaying: false, type: "Start" });
-      clearInterval(this.timer);
+      this.timer.clear();
     }
   }
 
@@ -112,6 +113,9 @@ class Timer extends Component {
   handleReset() {
     let alarm = document.getElementById('beep');
     this.resetAudio(alarm);
+    if (this.timer) {
+      this.timer.clear();
+    }
     this.setState(() => ({
       breakLength: 5,
       sessionLength: 25,
@@ -119,13 +123,14 @@ class Timer extends Component {
       isSession: true,
       situation: 'Session',
       isPlaying: false,
-      type: 'Start'
+      type: 'Start',
     }));
-    clearInterval(this.timer);
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer);
+    if (this.timer) {
+      this.timer.clear();
+    }
   }
 
   formatTimeLeft(timeInSeconds) {
