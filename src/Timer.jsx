@@ -1,9 +1,8 @@
-//Some of this code is AI generated
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import accurateInterval from 'accurate-interval';
+import beep from './assets/beep.mp3';
 
-navigator.vibrate = navigator.vibrate || navigator.webkitVibrate ||
-  navigator.mozVibrate || navigator.msVibrate;
+navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 
 class Timer extends Component {
   constructor(props) {
@@ -16,8 +15,9 @@ class Timer extends Component {
       situation: 'Session',
       isPlaying: false,
       type: 'Start',
-      audio: new Audio('./src/assets/beep.mp3')
     };
+    
+    this.audioRef = createRef();
 
     this.handleAdd = this.handleAdd.bind(this);
     this.handleReduce = this.handleReduce.bind(this);
@@ -28,6 +28,7 @@ class Timer extends Component {
   play(audio) {
     audio.play();
   }
+
   resetAudio(audio) {
     audio.pause();
     audio.currentTime = 0;
@@ -45,7 +46,7 @@ class Timer extends Component {
   }
 
   handleTimer() {
-    let alarm = this.state.audio;
+    let alarm = this.audioRef.current;
 
     if (!this.state.isPlaying) {
       this.setState({ isPlaying: true, type: "Stop" });
@@ -114,7 +115,7 @@ class Timer extends Component {
   }
 
   handleReset() {
-    let alarm = this.state.audio;
+    let alarm = this.audioRef.current;
     this.resetAudio(alarm);
     if (this.timer) {
       this.timer.clear();
@@ -145,6 +146,7 @@ class Timer extends Component {
   render() {
     return (
       <>
+        <audio ref={this.audioRef} src={beep} id="beep"></audio>
         <div id="setup" className="d-flex flex-row justify-content-center align-items-center">
           <div id="break" className="container d-flex flex-column">
             <h3 id="break-label" className="label white">Break</h3>
