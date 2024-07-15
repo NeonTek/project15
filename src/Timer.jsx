@@ -1,5 +1,5 @@
 //Some of this code is AI generated
-import { Component } from 'react';
+import React, { Component } from 'react';
 import accurateInterval from 'accurate-interval';
 
 navigator.vibrate = navigator.vibrate || navigator.webkitVibrate ||
@@ -16,6 +16,7 @@ class Timer extends Component {
       situation: 'Session',
       isPlaying: false,
       type: 'Start',
+      audio: new Audio('./src/assets/beep.mp3')
     };
 
     this.handleAdd = this.handleAdd.bind(this);
@@ -27,7 +28,6 @@ class Timer extends Component {
   play(audio) {
     audio.play();
   }
-
   resetAudio(audio) {
     audio.pause();
     audio.currentTime = 0;
@@ -45,7 +45,7 @@ class Timer extends Component {
   }
 
   handleTimer() {
-    let alarm = document.getElementById('beep');
+    let alarm = this.state.audio;
 
     if (!this.state.isPlaying) {
       this.setState({ isPlaying: true, type: "Stop" });
@@ -114,7 +114,7 @@ class Timer extends Component {
   }
 
   handleReset() {
-    let alarm = document.getElementById('beep');
+    let alarm = this.state.audio;
     this.resetAudio(alarm);
     if (this.timer) {
       this.timer.clear();
@@ -145,7 +145,6 @@ class Timer extends Component {
   render() {
     return (
       <>
-        <audio id='beep' src='./src/assets/beep.mp3'></audio>
         <div id="setup" className="d-flex flex-row justify-content-center align-items-center">
           <div id="break" className="container d-flex flex-column">
             <h3 id="break-label" className="label white">Break</h3>
