@@ -1,5 +1,5 @@
 //Some of this code is AI generated
-import React, { Component } from 'react';
+import { Component } from 'react';
 import accurateInterval from 'accurate-interval';
 
 navigator.vibrate = navigator.vibrate || navigator.webkitVibrate ||
